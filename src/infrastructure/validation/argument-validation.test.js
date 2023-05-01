@@ -1,4 +1,4 @@
-const { validateThreads } = require('./argument-validation')
+const { validateThreads, validateAmount } = require('./argument-validation')
 
 describe('argument validation', () => {
 
@@ -26,6 +26,22 @@ describe('argument validation', () => {
       expect(() => validateThreads(6)).toThrow()
       expect(() => validateThreads(10)).toThrow()
 
+    })
+
+  })
+
+  describe('validate amount', () => {
+
+    it('should throw if amount is a string', () => {
+      expect(() => validateAmount('test')).toThrow()
+    })
+
+    it('should throw if amount is less than 1', () => {
+      expect(() => validateAmount(0)).toThrow()
+    })
+
+    it('should not throw if amount is greater than 0', () => {
+      expect(() => validateAmount(1)).not.toThrow()
     })
 
   })
